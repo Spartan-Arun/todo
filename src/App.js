@@ -75,29 +75,29 @@ class App extends Component {
     }
 
 
-removeItem(valueToPop){
+  removeItem(valueToPop){
 
-let index=0;
+    let index=0;
 
-let found=0;
+    let found=0;
 
-for(;index<this.state.todos.length;index++){
+    for(;index<this.state.todos.length;index++){
 
-if(this.state.todos[index].name==valueToPop){
-  found=1;
-  break;
-}
-found=0;
-}
+      if(this.state.todos[index].name==valueToPop){
+        found=1;
+      break;
+      }
+      found=0;
+    }
 
-if(found){
-  this.state.todos.splice(index,1);
-}
+    if(found){
+    this.state.todos.splice(index,1);
+    }
 
-let todos=this.state.todos;
-this.setState({todos:todos})
-this.refs.todoForm.reset();
-}
+    let todos=this.state.todos;
+    this.setState({todos:todos})
+    this.refs.todoForm.reset();
+  }
 
   render() {
     return (
