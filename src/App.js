@@ -114,7 +114,7 @@ class App extends Component {
             <tbody>
               {this.state.todos.map((item,index)=><tr key={index}>
                 <th style={ item.status.toLowerCase()=='done'?{color:'green'}:{color:'red'} }>{item.name}</th>
-                <td style={{backgroundColor:'steelblue'}} onClick={()=>{this.removeItem(item.name)}}>&#10008;</td>
+                <td style={{backgroundColor:'steelblue',cursor:'pointer'}} onClick={()=>{this.removeItem(item.name)}}>&#10008;</td>
               </tr>)}
             </tbody>
           </table>
