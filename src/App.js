@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import './App.css';
 
 class App extends Component {
@@ -14,7 +15,9 @@ class App extends Component {
 
         placeholderComplete:'Enter task status',
 
-        todos:[]
+        todos:[],
+
+        ajaxData:[],
 
       }
 
@@ -26,6 +29,31 @@ class App extends Component {
 
     componentDidMount() {
       ReactDOM.findDOMNode(this.refs.task).focus();
+      axios.get('http://localhost:1234/').then(function(result){
+
+        let name=''
+
+        let email=''
+
+        let ajData={name,email}
+
+        let ajaxData=[]
+
+        let tempData=JSON.parse(result.data)
+
+        let i=0
+
+        for(;i<tempData.length;i++){
+
+          ajData={name:tempData[i].first_name+' '+tempData[i].last_name,email:tempData[i].email}
+
+          ajaxData.push(ajData);
+        
+        }
+        this.setState({ajaxData:ajaxData})
+      }.bind(this)).catch(function (error) {
+        console.log(error);
+      });
     }
 
     dataUpdater(event){
@@ -119,6 +147,10 @@ class App extends Component {
             </tbody>
           </table>
         </center>
+        <h4>Sample Ajax Data</h4>
+        <ul>
+          {this.state.ajaxData.map((item,index)=><li key={index}>{item.name}</li>)}
+        </ul>
       </div>
     );
   }
